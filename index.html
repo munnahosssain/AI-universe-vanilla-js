@@ -12,15 +12,19 @@
 </head>
 
 <body>
-    <header class="font-semibold text-center">
+    <header class="font-semibold text-center ">
         <h1 class="text-4xl my-4">AI-universe-hub</h1>
-        <button class="btn btn-error text-white">Sort By Date</button>
+        <button class="btn btn-error text-white mt-6">Sort By Date</button>
     </header>
-    <main class="lg:mx-48 my-12">
+    <main class="lg:mx-48 mt-6">
+        <section id="btn-loading" class="hidden">
+            <button class="btn btn-square loading "></button>
+            <!-- <progress  class="progress w-56 hidden"></progress> -->
+        </section>
         <section id="universe-container" class="flex grid lg:grid-cols-3 gap-6">
         </section>
         <section class="text-center my-6">
-            <button id="see-more" class="btn btn-wide btn-error text-white text-lg">See More</button>
+            <button id="see-more" class="btn btn-wide btn-error text-white text-lg hidden">See More</button>
         </section>
     </main>
 
