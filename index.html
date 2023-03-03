@@ -20,13 +20,35 @@
         <section id="btn-loading" class="text-center mt-24">
             <button class="btn loading">Loading</button>
         </section>
+
         <section id="universe-container" class="flex grid lg:grid-cols-3 gap-6">
         </section>
+
         <section class="text-center my-6">
             <button id="see-more" class="btn btn-wide btn-error text-white text-lg hidden">See More</button>
         </section>
-    </main>
 
+        <section>
+            <input type="checkbox" id="modal-universe" class="modal-toggle" />
+            <div id="modal" class="modal">
+
+            </div>
+        </section>
+    </main>
+    <ul id="myList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+    </ul>
+
+    <button onclick="removeLastItem()">Remove last item</button>
+    <script>
+        function removeLastItem() {
+            let lastItem = document.getElementById("myList").lastElementChild;
+
+            lastItem.remove();
+        }
+    </script>
     <script src="main.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </body>

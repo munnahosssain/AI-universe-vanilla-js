@@ -9,17 +9,17 @@ const loadUniverse = () => {
 }
 
 const displayUniverse = (data) => {
-    console.log(data);
+    // console.log(data);
     const universeContainer = document.getElementById('universe-container');
 
     const seeMore = document.getElementById('see-more');
-    if (data.length > 6) {
+    /* if (data.length > 6) {
         data = data.slice(0, 6);
         seeMore.classList.remove('hidden');
     }
     else {
         seeMore.classList.add('hidden');
-    }
+    } */
 
     data.forEach(allData => {
         universeContainer.innerHTML += `
@@ -39,7 +39,9 @@ const displayUniverse = (data) => {
                                 <i class="fa-regular fa-calendar-days mt-1 mr-2"></i>
                                 <p>${allData.published_in}</p>
                             </div>
-                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                            <label onclick="dataLoadById('${allData.id}')" for="modal-universe" class="btn gap-2 btn-outline btn-info">
+                                <i class="fa-solid fa-arrow-right mx-8"></i>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -49,12 +51,75 @@ const displayUniverse = (data) => {
 }
 
 document.getElementById('see-more').addEventListener('click', function () {
-    console.log('clicked');
+    // loadUniverse();
 })
 
 const dataLoadById = (featureId) => {
-    console.log(featureId);
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${featureId}`
+    // console.log(url);
+    fetch(url)
+        .then(res => res.json())
+        .then(data => detailsInfo(data.data));
+}
 
+
+const detailsInfo = (data) => {
+    const modal = document.getElementById('modal');
+    modal.innerHTML = "";
+    modal.innerHTML += ` 
+            <div class="modal-box w-7/12 max-w-full">
+                <div class="hero">
+                    <div class="hero-content flex-cols lg:flex grid-cols-2">
+                        <div class="card flex-shrink-0 max-w-md shadow-xl">
+                            <div class="card-body border-solid border-2 border-red-500 rounded-xl bg-base-200">
+                                <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
+                                <div class="grid grid-cols-3 gap-3 text-center">
+                                    <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
+                                        <div class="">${data.pricing?.[0].price ? data.pricing[0].price : 'Not Data Found'}</div>
+                                        <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Not Data Found'}</div>
+                                    </div>
+                                    <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
+                                        <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Not Data Found'}</div>
+                                        <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Not data Found'}</div>
+                                    </div>
+                                    <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
+                                        <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Not data Found'}</div>
+                                        <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Not data Found'}</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-4">
+                                    <div>
+                                        <h1 class="text-2xl font-semibold">Features</h1>
+                                        <ul class="list-disc">
+                                            <li>${data?.features?.[1]?.feature_name ? data?.features[1]?.feature_name : `className='hidden'`}</li>
+                                            <li>${data?.features?.[2]?.feature_name ? data?.features[2]?.feature_name : ``}</li>
+                                            <li>${data?.features?.[3]?.feature_name ? data?.features[3]?.feature_name : ``}</li>
+                                            <li>${data?.features?.[4]?.feature_name ? data?.features[4]?.feature_name : ``}</ > 
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h1 class="text-2xl font-semibold">Integrations</h1>
+                                        <ul class="list-disc">
+                                            <li>${data?.integrations?.[0] ? data?.integrations[0] : 'No data Found'}</li>
+                                            <li>${data?.integrations?.[1] ? data?.integrations[1] : 'No data Found'}</li>
+                                            <li>${data?.integrations?.[2] ? data?.integrations[2] : 'No data Found'}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <img class="w-full rounded-lg" src="${data.image_link?.[0] ? data.image_link[0] : 'Not data Found'}"/>
+                            <h1 class="text-center text-2xl font-semibold my-3">${data.input_output_examples?.[0].input ? data.input_output_examples[0].input : 'Can you give any example?'}</h1>
+                            <p class="text-center">${data.input_output_examples?.[0].output ? data.input_output_examples?.[0].output : 'No! Not Yet! Take a break!!!'}</p>
+                        </div >
+                    </div >
+                </div >
+                <div class="modal-action">
+                    <label for="modal-universe" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                </div>
+            </div >
+    `
 }
 
 loadUniverse();
