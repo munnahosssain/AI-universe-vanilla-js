@@ -2,22 +2,25 @@ const loadUniverse = () => {
     document.getElementById('btn-loading').classList.remove('hidden')
     fetch('https://openapi.programming-hero.com/api/ai/tools')
         .then(res => res.json())
-        .then(data => displayUniverse(data.data.tools));
-    document.getElementById('btn-loading').classList.add('hidden');
+        .then(data => {
+            displayUniverse(data.data.tools)
+            document.getElementById('btn-loading').classList.add('hidden');
+        });
 }
 
 const displayUniverse = (data) => {
-    // console.log(data);
+    console.log(data);
     const universeContainer = document.getElementById('universe-container');
+
+    const seeMore = document.getElementById('see-more');
     if (data.length > 6) {
         data = data.slice(0, 6);
-        const seeMore = document.getElementById('see-more');
         seeMore.classList.remove('hidden');
     }
     else {
-        seeMore.classList.add('hidden')
+        seeMore.classList.add('hidden');
     }
-    const seeMore = document.getElementById('see-more');
+
     data.forEach(allData => {
         universeContainer.innerHTML += `
             <div class="card bg-base-100 shadow-xl p-2">
@@ -46,7 +49,7 @@ const displayUniverse = (data) => {
 }
 
 document.getElementById('see-more').addEventListener('click', function () {
-    console.log();
+    console.log('clicked');
 })
 
 const dataLoadById = (featureId) => {
