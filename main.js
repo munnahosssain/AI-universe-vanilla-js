@@ -9,7 +9,6 @@ const loadUniverse = () => {
 }
 
 const displayUniverse = (data) => {
-    // console.log(data);
     const universeContainer = document.getElementById('universe-container');
 
     const seeMore = document.getElementById('see-more');
@@ -30,9 +29,11 @@ const displayUniverse = (data) => {
                     <ol class="list-decimal ml-4">
                         <li>${allData.features[0]}</li>
                         <li>${allData.features[1]}</li>
-                        <li>${allData.features[2]}</li>
-                    </ol>
-                    <div class="mt-6"> <hr/>
+                        <div>${allData.features[2] ? `<li>${allData.features[2]}</li>` : ''}</div>
+                        <div>${allData.features[3] ? `<li>${allData.features[3]}</li>` : ''}</div>
+                        <div>${allData.features[4] ? `<li>${allData.features[4]}</li>` : ''}</div>
+                    </ol >
+                    <div class="mt-6"> <hr />
                         <h2 class="card-title mt-4 text-2xl">${allData.name}</h2>
                         <div class='flex justify-between'>
                             <div class="flex mt-4">
@@ -44,8 +45,8 @@ const displayUniverse = (data) => {
                             </label>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         `
     });
 }
@@ -56,7 +57,6 @@ document.getElementById('see-more').addEventListener('click', function () {
 
 const dataLoadById = (featureId) => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${featureId}`
-    // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => detailsInfo(data.data));
@@ -64,62 +64,72 @@ const dataLoadById = (featureId) => {
 
 
 const detailsInfo = (data) => {
+    console.log(data);
     const modal = document.getElementById('modal');
     modal.innerHTML = "";
-    modal.innerHTML += ` 
-            <div class="modal-box w-7/12 max-w-full">
-                <div class="hero">
-                    <div class="hero-content flex-cols lg:flex grid-cols-2">
-                        <div class="card flex-shrink-0 max-w-md shadow-xl">
-                            <div class="card-body border-solid border-2 border-red-500 rounded-xl bg-base-200">
-                                <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
-                                <div class="grid grid-cols-3 gap-3 text-center">
-                                    <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                        <div class="">${data.pricing?.[0].price ? data.pricing[0].price : 'Not Data Found'}</div>
-                                        <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Not Data Found'}</div>
+    modal.innerHTML += `
+                <div class="modal-box w-7/12 max-w-full">
+                    <div class="hero">
+                        <div class="hero-content flex-cols lg:flex grid-cols-2">
+                            <div class="card flex-shrink-0 max-w-md shadow-xl">
+                                <div class="card-body border-solid border-2 border-red-500 rounded-xl bg-base-200">
+                                    <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
+                                    <div class="grid grid-cols-3 gap-3 text-center">
+                                        <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
+                                            <div class="">${data.pricing?.[0].price ? data.pricing[0].price : 'Not Yet!'}</div>
+                                            <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Not Data Found'}</div>
+                                        </div>
+                                        <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
+                                            <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Not Yet!'}</div>
+                                            <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Not data Found'}</div>
+                                        </div>
+                                        <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
+                                            <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Not Yet!'}</div>
+                                            <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Not data Found'}</div>
+                                        </div>
                                     </div>
-                                    <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
-                                        <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Not Data Found'}</div>
-                                        <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Not data Found'}</div>
-                                    </div>
-                                    <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                        <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Not data Found'}</div>
-                                        <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Not data Found'}</div>
+                                    <div class="flex justify-between mt-4">
+                                        <div>
+                                            <h1 class="text-2xl font-semibold">Features</h1>
+                                            <ul id="myList" class="list-disc">
+                                                <div>${data?.features?.[1]?.feature_name ? `<li>${data?.features?.[1]?.feature_name}</li>` : ''}</div>
+                                                <div>${data?.features?.[2]?.feature_name ? `<li>${data?.features?.[2]?.feature_name}</li>` : ''}</div>
+                                                <div>${data?.features?.[3]?.feature_name ? `<li>${data?.features?.[3]?.feature_name}</li>` : ''}</div>
+                                                <div>${data?.features?.[4]?.feature_name ? `<li>${data?.features?.[4]?.feature_name}</li>` : ''}</div>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h1 class="text-2xl font-semibold">Integrations</h1>
+                                            <ul id="myList" class="list-disc">
+                                                <div>${data?.integrations?.[0] ? `<li>${data?.integrations?.[0]}</li>` : 'No data Found'}</div>
+                                                <div>${data?.integrations?.[1] ? `<li>${data?.integrations?.[1]}</li>` : ''}</div>
+                                                <div>${data?.integrations?.[2] ? `<li>${data?.integrations?.[2]}</li>` : ''}</div>
+                                                <div>${data?.integrations?.[3] ? `<li>${data?.integrations?.[3]}</li>` : ''}</div>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex justify-between mt-4">
-                                    <div>
-                                        <h1 class="text-2xl font-semibold">Features</h1>
-                                        <ul class="list-disc">
-                                            <li>${data?.features?.[1]?.feature_name ? data?.features[1]?.feature_name : `className='hidden'`}</li>
-                                            <li>${data?.features?.[2]?.feature_name ? data?.features[2]?.feature_name : ``}</li>
-                                            <li>${data?.features?.[3]?.feature_name ? data?.features[3]?.feature_name : ``}</li>
-                                            <li>${data?.features?.[4]?.feature_name ? data?.features[4]?.feature_name : ``}</ > 
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h1 class="text-2xl font-semibold">Integrations</h1>
-                                        <ul class="list-disc">
-                                            <li>${data?.integrations?.[0] ? data?.integrations[0] : 'No data Found'}</li>
-                                            <li>${data?.integrations?.[1] ? data?.integrations[1] : 'No data Found'}</li>
-                                            <li>${data?.integrations?.[2] ? data?.integrations[2] : 'No data Found'}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="text-center lg:text-left">
-                            <img class="w-full rounded-lg" src="${data.image_link?.[0] ? data.image_link[0] : 'Not data Found'}"/>
-                            <h1 class="text-center text-2xl font-semibold my-3">${data.input_output_examples?.[0].input ? data.input_output_examples[0].input : 'Can you give any example?'}</h1>
-                            <p class="text-center">${data.input_output_examples?.[0].output ? data.input_output_examples?.[0].output : 'No! Not Yet! Take a break!!!'}</p>
-                        </div >
+                            <div class="text-center lg:text-left image-full">
+                            <div class="badge bg-red-800 p-4 font-bold mb-[-48px]">${data.accuracy.score ? data.accuracy.score * 100 : ''}% accuracy</div>
+                                <img class="w-full rounded-lg" src="${data.image_link[0]}" />
+                                <h1 class="text-center text-2xl font-semibold my-3">${data.input_output_examples?.[0].input ? data.input_output_examples[0].input : 'Can you give any example?'}</h1>
+                                    <p class="text-center">${data.input_output_examples?.[0].output ? data.input_output_examples?.[0].output : 'No! Not Yet! Take a break!!!'}</p>
+                                </div >
+                            </div >
                     </div >
+                    <div class="modal-action">
+                        <label for="modal-universe" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    </div>
                 </div >
-                <div class="modal-action">
-                    <label for="modal-universe" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                </div>
-            </div >
-    `
+            `
+}
+
+
+function removeLastItem() {
+    let lastItem = document.getElementById("myList").lastElementChild;
+
+    lastItem.remove();
 }
 
 loadUniverse();
