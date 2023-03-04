@@ -1,4 +1,5 @@
 let dataContainer = [];
+// Fetch API
 const loadUniverse = (dataLimit = 12) => {
     document.getElementById('btn-loading').classList.remove('hidden')
     fetch('https://openapi.programming-hero.com/api/ai/tools')
@@ -9,6 +10,7 @@ const loadUniverse = (dataLimit = 12) => {
         });
 }
 
+// Load dynamic API data
 const displayUniverse = (data, dataLimit) => {
     const universeContainer = document.getElementById('universe-container');
     const seeMore = document.getElementById('see-more');
@@ -55,10 +57,12 @@ const displayUniverse = (data, dataLimit) => {
     });
 }
 
+// Cards see more
 document.getElementById('btn-see-more').addEventListener('click', function () {
     loadUniverse(0);
 });
 
+// Fetch dynamic APIs
 const dataLoadById = (featureId) => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${featureId}`
     fetch(url)
@@ -66,6 +70,7 @@ const dataLoadById = (featureId) => {
         .then(data => detailsInfo(data.data));
 }
 
+// Modal data
 const detailsInfo = (data) => {
     console.log(data);
     const modal = document.getElementById('modal');
@@ -130,6 +135,7 @@ const detailsInfo = (data) => {
             `
 }
 
+// Sort by date
 const sortDate = () => {
     sortedDate(dataContainer);
 }
