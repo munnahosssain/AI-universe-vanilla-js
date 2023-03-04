@@ -71,29 +71,29 @@ const detailsInfo = (data) => {
     const modal = document.getElementById('modal');
     modal.innerHTML = "";
     modal.innerHTML += `
-                <div class="modal-box w-7/12 max-w-full">
-                    <div class="hero">
-                        <div class="hero-content flex-cols lg:flex grid-cols-2">
+                <div class="modal-box lg:w-7/12 max-w-full">
+                    <div class="hero flex">
+                        <div class="lg:hero-content lg:flex-cols lg:flex grid-cols-2">
                             <div class="card flex-shrink-0 lg:max-w-md shadow-xl">
                                 <div class="card-body border-solid border-2 border-red-500 rounded-xl bg-base-200">
-                                    <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
-                                    <div class="grid grid-cols-3 gap-3 text-center">
+                                    <h1 class="lg:text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
+                                    <div class="grid lg:grid-cols-3 gap-3 text-center">
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[0].price == 0 || data.pricing?.[0].price == null || data.pricing?.[0].price == 'No cost' ? 'Free of cost' : data.pricing?.[0].price}</div>
+                                            <div class="">${data.pricing?.[0].price == 0 || data.pricing?.[0].price == null || data.pricing?.[0].price == 'No cost' ? 'Free of cost/' : data.pricing?.[0].price}</div>
                                             <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Basic'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Free of cost'}</div>
+                                            <div class="">${data.pricing?.[1].price == 0 ? data.pricing[1].price : 'Free of cost/'}</div>
                                             <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Pro'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Free of cost'}</div>
+                                            <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Free of cost/'}</div>
                                             <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Enterprise'}</div>
                                         </div>
                                     </div>
-                                    <div class="flex justify-between mt-4">
+                                    <div class="lg:flex lg:justify-between mt-4">
                                         <div>
-                                            <h1 class="text-2xl font-semibold">Features</h1>
+                                            <h1 class="text-2xl font-semibold mt-4">Features</h1>
                                             <ul id="myList" class="list-disc">
                                                 <div>${data?.features?.[1]?.feature_name ? `<li>${data?.features?.[1]?.feature_name}</li>` : ''}</div>
                                                 <div>${data?.features?.[2]?.feature_name ? `<li>${data?.features?.[2]?.feature_name}</li>` : ''}</div>
@@ -102,7 +102,7 @@ const detailsInfo = (data) => {
                                             </ul>
                                         </div>
                                         <div>
-                                            <h1 class="text-2xl font-semibold">Integrations</h1>
+                                            <h1 class="text-2xl font-semibold mt-4">Integrations</h1>
                                             <ul id="myList" class="list-disc">
                                                 <div>${data?.integrations?.[0] ? `<li>${data?.integrations?.[0]}</li>` : 'No data Found'}</div>
                                                 <div>${data?.integrations?.[1] ? `<li>${data?.integrations?.[1]}</li>` : ''}</div>
@@ -112,8 +112,8 @@ const detailsInfo = (data) => {
                                         </div>
                                     </div>
                                 </div>
-                        </div>
-                            <div class="text-center lg:text-left image-full">
+                            </div>
+                            <div class="text-center lg:text-left image-full p-4">
                                 <div class="accuracy">
                                     <img class="w-full rounded-lg" src="${data.image_link[0]}" />
                                     <div>${data.accuracy.score ? `<span class="accuracy-text">${data.accuracy.score * 100}% accuracy</span>` : ''}</div>
