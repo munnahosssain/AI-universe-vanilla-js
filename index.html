@@ -15,7 +15,7 @@
 <body>
     <header class="font-semibold text-center ">
         <h1 class="text-4xl my-4">AI-universe-hub</h1>
-        <button class="btn btn-error text-white mt-6">Sort By Date</button>
+        <button class="btn btn-error text-white mt-6" onclick="sortDate()">Sort By Date</button>
     </header>
     <main class="lg:mx-48 mt-6">
         <section id="btn-loading" class="text-center mt-24">
@@ -25,8 +25,8 @@
         <section id="universe-container" class="flex grid lg:grid-cols-3 gap-6">
         </section>
 
-        <section class="text-center my-6">
-            <button id="see-more" class="btn btn-wide btn-error text-white text-lg hidden">See More</button>
+        <section id="see-more" class="text-center my-6 hidden">
+            <button id="btn-see-more" class="btn btn-wide btn-error text-white text-lg">See More</button>
         </section>
 
         <section>
