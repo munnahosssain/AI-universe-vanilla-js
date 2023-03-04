@@ -71,21 +71,21 @@ const detailsInfo = (data) => {
                 <div class="modal-box w-7/12 max-w-full">
                     <div class="hero">
                         <div class="hero-content flex-cols lg:flex grid-cols-2">
-                            <div class="card flex-shrink-0 max-w-md shadow-xl">
+                            <div class="card flex-shrink-0 lg:max-w-md shadow-xl">
                                 <div class="card-body border-solid border-2 border-red-500 rounded-xl bg-base-200">
                                     <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
                                     <div class="grid grid-cols-3 gap-3 text-center">
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[0].price ? data.pricing[0].price : 'Not Yet!'}</div>
-                                            <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Not Data Found'}</div>
+                                            <div class="">${data.pricing?.[0].price.length >= 0 ? data.pricing[0].price : 'Free of cost'}</div>
+                                            <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Basic'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
                                             <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Not Yet!'}</div>
-                                            <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Not data Found'}</div>
+                                            <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Pro'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
                                             <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Not Yet!'}</div>
-                                            <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Not data Found'}</div>
+                                            <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Enterprise'}</div>
                                         </div>
                                     </div>
                                     <div class="flex justify-between mt-4">
@@ -111,12 +111,14 @@ const detailsInfo = (data) => {
                                 </div>
                         </div>
                             <div class="text-center lg:text-left image-full">
-                            <div class="badge bg-red-800 p-4 font-bold mb-[-48px]">${data.accuracy.score ? data.accuracy.score * 100 : ''}% accuracy</div>
-                                <img class="w-full rounded-lg" src="${data.image_link[0]}" />
+                                <div class="accuracy">
+                                    <img class="w-full rounded-lg" src="${data.image_link[0]}" />
+                                    <div>${data.accuracy.score ? `<span class="accuracy-text">${data.accuracy.score * 100}% accuracy</span>` : ''}</div>
+                                </div>
                                 <h1 class="text-center text-2xl font-semibold my-3">${data.input_output_examples?.[0].input ? data.input_output_examples[0].input : 'Can you give any example?'}</h1>
                                     <p class="text-center">${data.input_output_examples?.[0].output ? data.input_output_examples?.[0].output : 'No! Not Yet! Take a break!!!'}</p>
-                                </div >
                             </div >
+                        </div >
                     </div >
                     <div class="modal-action">
                         <label for="modal-universe" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

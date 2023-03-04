@@ -1,0 +1,15 @@
+.accuracy {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.accuracy-text {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-weight: bold;
+    background-color: #EB5757;
+    padding: 10px;
+    border-radius: 8px;
+}
