@@ -1,3 +1,4 @@
+let dataContainer = [];
 const loadUniverse = (dataLimit = 12) => {
     document.getElementById('btn-loading').classList.remove('hidden')
     fetch('https://openapi.programming-hero.com/api/ai/tools')
@@ -10,9 +11,7 @@ const loadUniverse = (dataLimit = 12) => {
 
 const displayUniverse = (data, dataLimit) => {
     const universeContainer = document.getElementById('universe-container');
-
     const seeMore = document.getElementById('see-more');
-
     if (dataLimit && data.length > 6) {
         data = data.slice(0, 6);
         seeMore.classList.remove('hidden');
@@ -21,7 +20,9 @@ const displayUniverse = (data, dataLimit) => {
         seeMore.classList.add('hidden');
     }
 
-    universeContainer.innerHTML = "";
+    universeContainer.innerHTML = '';
+    dataContainer = data;
+
     data.forEach(allData => {
         const { } = allData;
         universeContainer.innerHTML += `
@@ -78,15 +79,15 @@ const detailsInfo = (data) => {
                                     <h1 class="text-xl font-bold">${data.description ? data.description : 'Not Data Found'}</h1>
                                     <div class="grid grid-cols-3 gap-3 text-center">
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[0].price.length > 0 ? data.pricing[0].price : 'Free of cost'}</div>
+                                            <div class="">${data.pricing?.[0].price == 0 || data.pricing?.[0].price == null || data.pricing?.[0].price == 'No cost' ? 'Free of cost' : data.pricing?.[0].price}</div>
                                             <div class="">${data.pricing?.[0].plan ? data.pricing[0].plan : 'Basic'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#d97706] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Not Yet!'}</div>
+                                            <div class="">${data.pricing?.[1].price ? data.pricing[1].price : 'Free of cost'}</div>
                                             <div class="">${data.pricing?.[1].plan ? data.pricing[1].plan : 'Pro'}</div>
                                         </div>
                                         <div class="bg-base-100 p-2 font-bold text-[#03A30A] rounded-lg my-auto">
-                                            <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Not Yet!'}</div>
+                                            <div class="">${data.pricing?.[2].price ? data.pricing[2].price : 'Free of cost'}</div>
                                             <div class="">${data.pricing?.[2].plan ? data.pricing[2].plan : 'Enterprise'}</div>
                                         </div>
                                     </div>
@@ -129,11 +130,8 @@ const detailsInfo = (data) => {
             `
 }
 
-const sortDate = async () => {
-    const url = 'https://openapi.programming-hero.com/api/ai/tools';
-    const res = await fetch(url);
-    const data = await res.json();
-    sortedDate(data.data.tools);
+const sortDate = () => {
+    sortedDate(dataContainer);
 }
 
 const sortedDate = (data) => {
@@ -150,6 +148,8 @@ const sortedDate = (data) => {
         return 0;
     });
     displayUniverse(data);
+    const seeMore = document.getElementById('see-more');
+    seeMore.classList.remove('hidden');
 }
 
 loadUniverse(6);

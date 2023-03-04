@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/0edfe9fa03.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
     <title>AI Universe Hub</title>
 </head>
 
@@ -18,23 +18,23 @@
         <button class="btn btn-error text-white mt-6" onclick="sortDate()">Sort By Date</button>
     </header>
     <main class="lg:mx-48 mt-6">
+        <!-- Loading spinner -->
         <section id="btn-loading" class="text-center mt-24">
             <button class="btn loading">Loading</button>
         </section>
-
+        <!-- Load APIs data -->
         <section id="universe-container" class="flex grid lg:grid-cols-3 gap-6">
         </section>
-
+        <!-- See more cards -->
         <section id="see-more" class="text-center my-6">
             <button id="btn-see-more" class="btn btn-wide btn-error text-white text-lg">See More</button>
         </section>
-
+        <!-- Modal -->
         <section>
             <input type="checkbox" id="modal-universe" class="modal-toggle" />
             <div id="modal" class="modal">
             </div>
         </section>
-
     </main>
     <script src="main.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
